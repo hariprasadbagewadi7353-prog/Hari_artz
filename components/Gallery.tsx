@@ -1,11 +1,32 @@
 
-import React, { useState } from 'react';
-import { ART_PIECES } from '../constants';
+import React, { useState, useEffect } from 'react';
 import { ArtPiece } from '../types';
-import { X, Maximize2 } from 'lucide-react';
+import { X, Maximize2, Loader2 } from 'lucide-react';
 
 const Gallery: React.FC = () => {
   const [selectedPiece, setSelectedPiece] = useState<ArtPiece | null>(null);
+  const [drawings, setDrawings] = useState<ArtPiece[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchDrawings = async () => {
+    try {
+      const response = await fetch('/api/drawings');
+      const data = await response.json();
+      setDrawings(data);
+    } catch (error) {
+      console.error('Error fetching drawings:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDrawings();
+    
+    // Listen for custom event to refresh gallery
+    window.addEventListener('refresh-gallery', fetchDrawings);
+    return () => window.removeEventListener('refresh-gallery', fetchDrawings);
+  }, []);
 
   return (
     <section id="gallery" className="py-24 bg-[#050505]">
@@ -16,30 +37,38 @@ const Gallery: React.FC = () => {
             <div className="h-1 w-24 gold-bg"></div>
           </div>
           <p className="text-gray-500 max-w-md text-right">
-            Browse our curated selection of fine art portraits. Each piece is a unique dialogue between light and shadow.
+            A curated selection of portrait drawings. Each piece explores the delicate balance between light and shadow.
           </p>
         </div>
 
-        <div className="masonry-grid">
-          {ART_PIECES.map((piece) => (
-            <div 
-              key={piece.id} 
-              className="masonry-item group relative overflow-hidden cursor-pointer"
-              onClick={() => setSelectedPiece(piece)}
-            >
-              <img 
-                src={piece.imageUrl} 
-                alt={piece.title} 
-                className="w-full h-auto object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                <Maximize2 className="absolute top-6 right-6 text-[#d4af37]" size={24} />
-                <h3 className="text-2xl font-serif font-bold text-white mb-1">{piece.title}</h3>
-                <p className="text-[#d4af37] text-sm font-medium tracking-widest">{piece.year} • {piece.medium}</p>
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-24 space-y-4">
+            <Loader2 className="animate-spin text-[#d4af37]" size={48} />
+            <p className="text-gray-500 font-serif italic">Loading collection...</p>
+          </div>
+        ) : (
+          <div className="masonry-grid">
+            {drawings.map((piece) => (
+              <div 
+                key={piece.id} 
+                className="masonry-item group relative overflow-hidden cursor-pointer"
+                onClick={() => setSelectedPiece(piece)}
+              >
+                <img 
+                  src={piece.imageUrl} 
+                  alt={piece.title} 
+                  className="w-full h-auto object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+                  <Maximize2 className="absolute top-6 right-6 text-[#d4af37]" size={24} />
+                  <h3 className="text-2xl font-serif font-bold text-white mb-1">{piece.title}</h3>
+                  <p className="text-[#d4af37] text-sm font-medium tracking-widest">{piece.year} • {piece.medium}</p>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Modal Overlay */}
@@ -74,14 +103,14 @@ const Gallery: React.FC = () => {
                   <span className="text-gray-500 text-sm">Medium</span>
                   <span className="text-white text-sm">{selectedPiece.medium}</span>
                 </div>
-                <div className="flex justify-between border-b border-white/5 pb-2">
-                  <span className="text-gray-500 text-sm">Artist</span>
-                  <span className="text-white text-sm">Elias Thornwood</span>
-                </div>
               </div>
-              <button className="gold-bg text-black py-4 font-bold uppercase tracking-widest hover:brightness-110 transition-all">
-                Inquire About Original
-              </button>
+              <a 
+                href="#contact" 
+                onClick={() => setSelectedPiece(null)}
+                className="gold-bg text-black py-4 font-bold uppercase tracking-widest hover:brightness-110 transition-all text-center"
+              >
+                Inquire About Piece
+              </a>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { NAV_LINKS } from '../constants';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Instagram } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,8 +23,7 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
         <a href="#" className="text-2xl font-serif font-bold tracking-widest flex items-center space-x-2">
-          <span className="gold-gradient">SOULSKETCH</span>
-          <span className="text-white/40 font-light text-sm uppercase hidden sm:inline">Studio</span>
+          <span className="gold-gradient">Hari_ArtZ</span>
         </a>
 
         {/* Desktop Links */}
@@ -33,16 +32,14 @@ const Navbar: React.FC = () => {
             <a 
               key={link.href}
               href={link.href}
-              className="text-sm font-medium hover:text-[#d4af37] transition-colors tracking-wide"
+              className="text-sm font-medium hover:text-[#d4af37] transition-colors tracking-widest uppercase"
             >
               {link.label}
             </a>
           ))}
-          <a 
-            href="#commissions" 
-            className="px-6 py-2 border border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-all duration-300 text-sm font-semibold uppercase tracking-tighter"
-          >
-            Book Session
+          <div className="h-4 w-px bg-white/10 mx-2"></div>
+          <a href="https://www.instagram.com/im_harsha__7" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#d4af37] transition-colors">
+            <Instagram size={18} />
           </a>
         </div>
 

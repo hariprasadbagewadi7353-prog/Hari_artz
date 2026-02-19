@@ -21,14 +21,14 @@ const Hero: React.FC = () => {
             <span className="italic font-normal">That Speak</span>
           </h1>
           <p className="text-xl text-gray-400 mb-10 leading-relaxed font-light">
-            Every face is a landscape of stories. We transform your most precious moments into museum-quality charcoal and graphite masterpieces that transcend time.
+            Specializing in high-contrast portraiture. Every drawing is a journey through light and shadow, capturing the raw essence of the human spirit in charcoal and graphite.
           </p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
-            <a href="#gallery" className="gold-bg text-black px-10 py-4 font-bold flex items-center justify-center hover:scale-105 transition-transform">
-              View Collection <ArrowRight className="ml-2" size={20} />
+            <a href="#gallery" className="gold-bg text-black px-10 py-4 font-bold flex items-center justify-center hover:scale-105 transition-transform tracking-widest uppercase text-xs">
+              Explore Gallery <ArrowRight className="ml-2" size={16} />
             </a>
-            <a href="#commissions" className="bg-white/5 backdrop-blur-sm text-white border border-white/20 px-10 py-4 font-bold flex items-center justify-center hover:bg-white/10 transition-colors">
-              Request Commission
+            <a href="#post" className="bg-white/5 backdrop-blur-sm text-white border border-white/20 px-10 py-4 font-bold flex items-center justify-center hover:bg-white/10 transition-colors tracking-widest uppercase text-xs">
+              Curator Access
             </a>
           </div>
         </div>

@@ -3,9 +3,7 @@ import { ArtPiece, Testimonial, NavLink } from './types';
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Gallery', href: '#gallery' },
-  { label: 'About', href: '#about' },
-  { label: 'Commissions', href: '#commissions' },
-  { label: 'Testimonials', href: '#testimonials' },
+  { label: 'Admin Panel', href: '#post' },
   { label: 'Contact', href: '#contact' },
 ];
 
