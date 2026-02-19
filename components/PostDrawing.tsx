@@ -46,15 +46,15 @@ const PostDrawing: React.FC<PostDrawingProps> = ({ onSuccess }) => {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this drawing?')) return;
-    
     try {
       const response = await fetch(`/api/drawings/${id}`, {
         method: 'DELETE'
       });
       if (response.ok) {
-        fetchDrawings();
+        await fetchDrawings();
         onSuccess();
+      } else {
+        alert('Error: Could not delete drawing.');
       }
     } catch (error) {
       console.error('Error deleting drawing:', error);
@@ -79,6 +79,7 @@ const PostDrawing: React.FC<PostDrawingProps> = ({ onSuccess }) => {
       setAuthError(false);
     } else {
       setAuthError(true);
+      alert('Incorrect password. Please try again.');
       setTimeout(() => setAuthError(false), 3000);
     }
   };
@@ -100,6 +101,8 @@ const PostDrawing: React.FC<PostDrawingProps> = ({ onSuccess }) => {
         fetchDrawings();
         onSuccess();
         setTimeout(() => setIsSuccess(false), 3000);
+      } else {
+        alert('Error: Could not post drawing. The image might be too large.');
       }
     } catch (error) {
       console.error('Error posting drawing:', error);
@@ -120,7 +123,7 @@ const PostDrawing: React.FC<PostDrawingProps> = ({ onSuccess }) => {
               <Lock className="text-[#d4af37]" size={32} />
             </div>
             <h2 className="text-4xl font-serif font-bold mb-4">Admin Login</h2>
-            <p className="text-gray-500 mb-10 font-light">Only authorized users can upload new drawings to the gallery.</p>
+            <p className="text-gray-500 mb-10 font-light">Only authorized users can upload new drawings to the gallery. <br/> <span className="text-[10px] uppercase tracking-widest opacity-30 mt-2 block">Hint: admin123</span></p>
             
             <form onSubmit={handleLogin} className="space-y-4">
               <div className="relative">
