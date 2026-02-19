@@ -29,7 +29,7 @@ const Gallery: React.FC = () => {
   }, []);
 
   return (
-    <section id="gallery" className="py-24 bg-[#050505]">
+    <section id="gallery" className="py-24 bg-[#050505]/80 backdrop-blur-sm">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div>

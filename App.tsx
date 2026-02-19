@@ -14,7 +14,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#030303] text-white selection:bg-[#d4af37] selection:text-black">
+    <div className="min-h-screen bg-transparent text-white selection:bg-[#d4af37] selection:text-black">
       <Navbar />
       
       <main>

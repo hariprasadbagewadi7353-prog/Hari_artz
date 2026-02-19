@@ -113,7 +113,7 @@ const PostDrawing: React.FC<PostDrawingProps> = ({ onSuccess }) => {
 
   if (!isAdmin) {
     return (
-      <section id="post" className="py-32 bg-[#050505] relative overflow-hidden">
+      <section id="post" className="py-32 bg-[#050505]/80 backdrop-blur-sm relative overflow-hidden">
         {/* Artistic Background Element */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#d4af37]/5 blur-[120px] rounded-full -mr-48 -mt-48"></div>
         
@@ -154,7 +154,7 @@ const PostDrawing: React.FC<PostDrawingProps> = ({ onSuccess }) => {
   }
 
   return (
-    <section id="post" className="py-32 bg-[#050505] relative">
+    <section id="post" className="py-32 bg-[#050505]/80 backdrop-blur-sm relative">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center mb-20 gap-8">
