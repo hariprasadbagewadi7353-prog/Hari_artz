@@ -1,0 +1,7 @@
+{
+  "name": "SoulSketch Studio",
+  "description": "A high-end portrait art gallery featuring emotional, high-contrast drawings with a premium dark-gold aesthetic and an AI-powered commission assistant.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
